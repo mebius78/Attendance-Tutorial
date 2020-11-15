@@ -11,10 +11,18 @@ class UsersController < ApplicationController
   def show
   end
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> japanization-and-time-format
   def new
     @user = User.new
   end
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> japanization-and-time-format
   def create
     @user = User.new(user_params)
     if @user.save
@@ -26,6 +34,10 @@ class UsersController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> japanization-and-time-format
   def edit
   end
 
@@ -34,7 +46,11 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
+<<<<<<< HEAD
       render :edit      
+=======
+      render :edit
+>>>>>>> japanization-and-time-format
     end
   end
 
@@ -50,6 +66,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
+<<<<<<< HEAD
     # beforeフィルター
 
     # paramsハッシュからユーザーを取得します。
@@ -75,4 +92,31 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to root_url unless current_user.admin?
     end
+=======
+  # beforeフィルター
+
+  # paramsハッシュからユーザーを取得します。
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # ログイン済みのユーザーが確認します。
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "ログインしてください。"
+      redirect_to login_url
+    end
+  end
+
+  # アクセスしたユーザーが現在ログインしているユーザーが確認します。
+  def correct_user
+    redirect_to(root_url) unless current_user?(@user)
+  end
+
+  # システム管理権限所有かどうか判断します。
+  def admin_user
+    redirect_to root_url unless  current_user.admin?
+  end
+>>>>>>> japanization-and-time-format
 end
