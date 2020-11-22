@@ -7,17 +7,13 @@
     <thead>
       <tr>
         <th><%= User.human_attribute_name :name %></th>
-<<<<<<< HEAD
         <th></th>
-=======
->>>>>>> japanization-and-time-format
       </tr>
     </thead>
 
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.name, user %></td>
-<<<<<<< HEAD
         <td>
           <% if current_user.admin? && !current_user?(user) %>
             <%= link_to "削除", user, method: :delete,
@@ -25,8 +21,6 @@
                 class: "btn btn-danger" %>
           <% end %>
         </td>
-=======
->>>>>>> japanization-and-time-format
       </tr>
     <% end %>
   </table>
