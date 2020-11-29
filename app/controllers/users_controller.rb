@@ -44,17 +44,22 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  def edit_basic_info
-    params.require(:user).permit(:department, :basic_time, :work_time)
+  def update_basic_info
+  if @user.update_attributes(basic_info_params)
+    # 更新成功時の処理
+  else
+    # 更新失敗時の処理
+  end
+  redirect_to users_url
   end
 
   def update_basic_info
     if @user.update_attributes(basic_info_params)
-      flash[:success] = '#{@user.name}の基本情報を更新しました。'
+      flash[:success] = "#{@user.name}の基本情報を更新しました。"
     else
-      flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+    flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
     end
-　  redirect_to users_url
+    redirect_to users_url
   end
 
   private
@@ -88,7 +93,8 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to root_url unless current_user.admin?
     end
+
+    def basic_info_params
+      params.require(:user).permit(:department, :basic_time, :work_time)
+    end
 end
-  def basic_info_params
-    params.require(:user).permit(:department, :basic_time, :work_time)
-  end
